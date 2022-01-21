@@ -8,8 +8,9 @@ const Registro = ({setVentana}) => {
 	const [password, setPassword] = useState("")
     const [nombre, setNombre] = useState("")
     const [telefono, setTelefono] = useState("")
+    const [error, setError] = useState(false)
 
-    const registrarse = (e) => {
+    function registrarse(e){
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -27,17 +28,26 @@ const Registro = ({setVentana}) => {
             .catch((error) => {
                 const errorMessage = error.message;
                 console.log("Error: ", errorMessage)
+                document.getElementById("error").innerHTML = errorMessage
+                setError(true)
             });
     }
 
     return (
         <div>
         <h1>Regístrate</h1>
-            <input id="email" type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-            <input id="password" type="password" placeholder="Contraseña" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-            <input id="nombre" type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)}></input>
-            <input id="telefono" type="text" placeholder="Telefono" value={telefono} onChange={(e) => setTelefono(e.target.value)}></input>
-            <button type="submit" onClick={registrarse}>Registrarse</button>
+        <form onSubmit={(e) => {
+            e.preventDefault()
+            registrarse(e)
+        }}>
+            <input id="email" type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)}></input><br/>
+            <input id="password" type="password" placeholder="Contraseña" required value={password} onChange={(e) => setPassword(e.target.value)}></input><br/>
+            <input id="nombre" type="text" placeholder="Nombre" required value={nombre} onChange={(e) => setNombre(e.target.value)}></input><br/>
+            <input id="telefono" type="text" placeholder="Telefono" value={telefono} onChange={(e) => setTelefono(e.target.value)}></input><br/>
+            <p id="error" style={{color : "red"}} hidden={!error}>error</p>
+
+            <button type="submit">Registrarse</button>
+        </form>
         <p>¿Ya tienes cuenta? <a href="#" onClick={() => setVentana("Login")}>Inicia sesión</a></p>
         </div>
     )

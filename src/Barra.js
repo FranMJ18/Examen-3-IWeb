@@ -16,7 +16,7 @@ const Barra = ({ setVentana }) => {
 			}} >Mis imagenes</button>
 			<button onClick={() => {
 				setVentana("SubirImagen")
-			}} >Subir imagen</button>
+			}} >Publicar imagen</button>
 		</div>
 	)
 }

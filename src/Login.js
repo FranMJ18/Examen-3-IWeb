@@ -29,12 +29,16 @@ const Login = ({ setVentana }) => {
 	}
 
 	return (
-		<div >
-			<input type="email" value={email} onChange={(e) => setEmail(e.target.value)}></input>
-			<input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
-			<div>
-				<button onClick={iniciarSesion}>Iniciar sesion</button>
-			</div>
+		<div>
+			<h1>Inicio de sesión</h1>
+			<form onSubmit={(e) => {
+				e.preventDefault()
+				iniciarSesion(e)
+			}}>
+				<input type="email" value={email} placeholder="Email" required onChange={(e) => setEmail(e.target.value)}></input><br/>
+				<input type="password" value={password} placeholder="Contraseña" required onChange={(e) => setPassword(e.target.value)}></input><br/>
+				<button type="submit">Iniciar sesion</button>
+			</form>
 			<p>¿No tienes cuenta? <a href="#" onClick={() => setVentana("Registro")}>Registrarse</a></p>
 		</div>
 	)

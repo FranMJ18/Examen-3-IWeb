@@ -29,6 +29,7 @@ const Imagenes = ({ Mias }) => {
 
 	return (
 		<>
+			<h1>{Mias ? "Mis imágenes" : "Todas las imágenes"}</h1>
 			<input placeholder="Texto" value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></input>
 			<input placeholder="Hashtags separados por espacios" value={hashtags} onChange={(e) => setHashtags(e.target.value)}></input>
 			<button onClick={cargarImagenes}>Buscar</button>
@@ -36,7 +37,7 @@ const Imagenes = ({ Mias }) => {
 				Imagenes != null && Imagenes.map((elem, idx) => {
 					return (
 						<div key={idx}>
-							<img src={elem.url}></img>
+							<img src={elem.url}></img><br/>
 							{
 								getAuth().currentUser.uid == elem.creador ?
 									<input value={Imagenes[idx].descripcion} onChange={(e) => {

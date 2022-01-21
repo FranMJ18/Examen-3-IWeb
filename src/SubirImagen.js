@@ -31,6 +31,7 @@ const SubirImagen = ({ setVentana }) => {
 
 	return (
 		<>
+			<h1>Publicar imagen</h1>
 			<input type="text" placeholder="Descripcion" value={descripcion} onChange={(e) => setDescripcion(e.target.value)}></input>
 			<input type="file" onChange={(e) => {
 				const f = e.target.files[0]
