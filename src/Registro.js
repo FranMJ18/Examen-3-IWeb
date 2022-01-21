@@ -6,23 +6,13 @@ const Registro = ({setVentana}) => {
 
     const [email, setEmail] = useState("")
 	const [password, setPassword] = useState("")
-    const [nombre, setNombre] = useState("")
-    const [telefono, setTelefono] = useState("")
     const [error, setError] = useState(false)
 
     function registrarse(e){
         const auth = getAuth();
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                const user = userCredential.user;
-                const db = getFirestore()
-                setDoc(doc(db, "usuarios", user.uid), {
-                    nombre : nombre,
-                    email : email,
-                    telefono : telefono
-                }).then(
-                    setVentana("MisImagenes")
-                )
+                setVentana("Articulos")
             })
             
             .catch((error) => {
@@ -42,8 +32,6 @@ const Registro = ({setVentana}) => {
         }}>
             <input id="email" type="email" placeholder="Email" required value={email} onChange={(e) => setEmail(e.target.value)}></input><br/>
             <input id="password" type="password" placeholder="Contraseña" required value={password} onChange={(e) => setPassword(e.target.value)}></input><br/>
-            <input id="nombre" type="text" placeholder="Nombre" required value={nombre} onChange={(e) => setNombre(e.target.value)}></input><br/>
-            <input id="telefono" type="text" placeholder="Telefono" value={telefono} onChange={(e) => setTelefono(e.target.value)}></input><br/>
             <p id="error" style={{color : "red"}} hidden={!error}>error</p>
 
             <button type="submit">Registrarse</button>

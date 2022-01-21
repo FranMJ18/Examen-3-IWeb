@@ -11,20 +11,10 @@ const Login = ({ setVentana }) => {
 		const auth = getAuth();
 		signInWithEmailAndPassword(auth, email, password)
 			.then((userCredential) => {
-				setVentana("MisImagenes")
+				setVentana("Articulos")
 			})
 			.catch((error) => {
 				console.log(error)
-			});
-	}
-	const registrarse = (e) => {
-		const auth = getAuth();
-		createUserWithEmailAndPassword(auth, email, password)
-			.then((userCredential) => {
-				setVentana("MisImagenes")
-			})
-			.catch((error) => {
-				console.error(error)
 			});
 	}
 
